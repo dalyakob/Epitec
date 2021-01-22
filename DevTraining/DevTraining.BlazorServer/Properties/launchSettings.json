@@ -1,0 +1,19 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:64443/",
+      "sslPort": 44386
+    }
+  },
+  "profiles": {
+    "DevTraining.BlazorServer": {
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "commandName": "IISExpress",
+      "launchBrowser": true
+    }
+  }    
+}

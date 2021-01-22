@@ -1,0 +1,63 @@
+﻿@page "/"
+@page "/contact-list"
+@using DevTraining.BlazorServer.Data.Entities
+@using DevTraining.BlazorServer.Data.Services
+
+@inject IContactService service
+
+<h3>Contacts List</h3>
+
+<hr />
+
+<p>This component demonstrates the use of the API using Ardelis Endpoints, Clean Architecture, Repository Pattern, and XUnit Integration/Unit Tests</p>
+
+@if (contacts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+                <th>Birth Date</th>
+                <th>Is Active</th>
+                <th>In Activated Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var contact in contacts)
+            {
+                <tr>
+                    <td>@contact.FirstName</td>
+                    <td>@contact.LastName</td>
+                    <td>@contact.PhoneNumber</td>
+                    <td>@contact.BirthDate</td>
+                    <td>@contact.IsActive</td>
+                    <td>@contact.InActivatedDate</td>
+
+                    <td>
+                        <a href="@($"contact-edit/{contact.Id}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-edit-circle"></i>Edit
+                        </a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IReadOnlyList<ContactResponseDTO> contacts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        contacts = await service.GetAll();
+    }
+
+}
+

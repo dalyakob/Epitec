@@ -1,0 +1,59 @@
+﻿@page "/contact-add"
+@page "/contact-edit/{ContactId:guid}"
+
+@if (!Saved)
+{
+    <section class="contact-edit">
+        @if (ContactId != Guid.Empty)
+        {
+            <h3 class="page-title">Details For @Contact.FirstName @Contact.LastName</h3>
+        }
+        else
+        {
+            <h3 class="page-title">Create New Contact</h3>
+        }
+        <hr/>
+    <EditForm Model="@Contact" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary></ValidationSummary>
+        <div class="form-group row">
+            <label for="FirstName" class="col-sm-3">First Name:</label>
+            <InputText id="FirstName" class="form-control col-sm-8" @bind-Value="@Contact.FirstName" placeholder="Enter First Name"></InputText>
+            <ValidationMessage class="offset-sm-8" For="@(() => Contact.FirstName)" />
+        </div>
+
+        <div class="form-group row">
+            <label for="LastName" class="col-sm-3">Last Name:</label>
+            <InputText id="LastName" class="form-control col-sm-8" @bind-Value="@Contact.LastName" placeholder="Enter Last Name"></InputText>
+            <ValidationMessage class="offset-sm-8" For="@(() => Contact.LastName)" />
+        </div>
+
+        <div class="form-group row">
+            <label for="PhoneNumber" class="col-sm-3">Phone Number:</label>
+            <InputText id="PhoneNumber" class="form-control col-sm-8" @bind-Value="@Contact.PhoneNumber" placeholder="Enter Phone Number"></InputText>
+            <ValidationMessage class="offset-sm-8" For="@(() => Contact.PhoneNumber)" />
+        </div>
+
+        <div class="form-group row">
+            <label for="BirthDate" class="col-sm-3">Birthdate:</label>
+            <InputDate TValue="DateTime" id="BirthDate" class="form-control col-sm-8" @bind-Value="@Contact.BirthDate" placeholder="Enter Birthdate"></InputDate>
+        </div>
+
+        <button type="submit" class="btn btn-primary edit-btn">Save Contact</button>
+
+        @if (Contact.Id != Guid.Empty)
+        {
+            <tab/>
+            <a class="btn btn-danger" @onclick="@DeleteContact">Delete</a>
+        }
+        <tab/>
+        <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back</a>
+    </EditForm>
+    </section>
+}
+else
+{
+    <div class=" alert @StatusClass">@Message</div>
+    <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back</a>
+
+}
