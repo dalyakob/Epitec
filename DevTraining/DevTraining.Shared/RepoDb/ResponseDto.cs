@@ -12,7 +12,7 @@ namespace DevTraining.Shared
     {
 
         public ResponseDto(string connectionString): base (connectionString)
-        {        }
+        {}
 
         public  Contact GetById(Guid id)
         {

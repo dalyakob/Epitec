@@ -25,3 +25,4 @@ namespace DevTraining.BlazorServer.Data.Entities
         public DateTime? InActivatedDate { get; set; }
     }
 }
+
